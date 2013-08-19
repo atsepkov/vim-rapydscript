@@ -14,9 +14,11 @@ Installation
 ============
 If you want the easiest, laziest way to install this plugin, just get Vundle plugin and then add the following line to your .vimrc:
 
-	Bundle atsepkov/vim-rapydscript
+	Bundle "atsepkov/vim-rapydscript"
 
-Otherwise simply unpack this repo inside your .vim directory and hope that you don't have anything else by the name 'rapydscript' in any of these directories, or it will get overwritten.
+Then run `:BundleInstall` command in vim and it will automatically download this repo from github and set it up.
+
+Otherwise, you can download this repo manually and unpack it inside your .vim directory and hope that you don't have anything else by the name 'rapydscript' in any of these directories, or it will get overwritten.
 
 Note that to work properly with this bundle, vim needs to be told which file you'll be associating with RapydScript. The recommended file extension for RapydScript is .pyj, so you will need to add the following line to your .vimrc:
 
