@@ -54,3 +54,9 @@ hi link Conditional     Statement
 hi link StorageClass    Statement
 hi link Operator        Statement
 hi link Statement       Statement
+
+" saner spellcheck colors
+hi SpellBad		ctermfg=white ctermbg=160
+hi SpellCap		ctermfg=white ctermbg=240
+hi SpellRare	ctermfg=white ctermbg=190
+hi SpellLocal	ctermfg=white ctermbg=162
