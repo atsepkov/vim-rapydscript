@@ -104,7 +104,7 @@ syn region  rapydscriptSuperclasses start="("ms=s+1 end=")"me=e-1 keepend contai
 syn match   rapydscriptSuperclass "[a-zA-Z_$][a-zA-Z_0-9$]*" contained
 
 " Class definitions
-syn region  rapydscriptClass start="^\s*class" end="\s*:" contains=rapydscriptClassDef,rapydscriptClassName,rapydscriptSuperclasses
+syn region  rapydscriptClass start="^\s*class\>" end="\s*:" contains=rapydscriptClassDef,rapydscriptClassName,rapydscriptSuperclasses
 syn keyword rapydscriptClassDef class contained nextgroup=rapydscriptClassName
 syn match   rapydscriptClassName	"[a-zA-Z_$][a-zA-Z0-9_$]*" display contained nextgroup=rapydscriptSuperclasses skipwhite
 syn region  rapydscriptSuperclasses start="("ms=s+1 end=")"me=e-1 keepend contained contains=rapydscriptSuperclass transparent

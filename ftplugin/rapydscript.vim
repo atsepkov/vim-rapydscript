@@ -21,3 +21,7 @@ set makeprg=echo\ 'Compiling\ %'\ &&\ rapydscript\ %\ &&\ echo\ 'Finished\ compi
 " trigger Tabular automatically on :, but only when line looks like a legit
 " hash
 "inoremap <silent> : :<Esc>:call Align(':', '^\s\+[''"]\?[A-Za-z0-9_-]\+[''"]\?\s*:$')<CR>a
+
+" dump current arg (in the future I should have this auto-prepend \ to hashes
+" and arrays)
+map ,D! viwoh"zy<F12>o<HOME>console.log('<ESC>"zpa:',<ESC>"zpa)<ESC>hh<F12>
