@@ -60,3 +60,11 @@ hi SpellBad		ctermfg=white ctermbg=160
 hi SpellCap		ctermfg=white ctermbg=240
 hi SpellRare	ctermfg=white ctermbg=63
 hi SpellLocal	ctermfg=white ctermbg=162
+
+syn match   myTodo   contained   "\<\(TODO\|FIXME\):"
+hi def link myTodo Todo
+
+highlight DiffAdd		cterm=none ctermfg=black ctermbg=darkgreen
+highlight DiffDelete	cterm=none ctermfg=black ctermbg=darkred
+highlight DiffChange	cterm=none ctermbg=blue
+highlight DiffText		cterm=bold ctermbg=darkblue
