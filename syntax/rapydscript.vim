@@ -122,7 +122,7 @@ syn match rapydscriptDefaultAssignment "=" nextgroup=rapydscriptParamDefault ski
 syn match rapydscriptParamDefault "=\@<=[^,]*" contained transparent contains=@rapydscriptStringType,@rapydscriptNumberType,@rapydscriptBuiltin,rapydscriptKeyword
 
 syn keyword rapydscriptRepeat	for while
-syn keyword rapydscriptConditional	if elif else:
+syn keyword rapydscriptConditional	if elif else
 syn keyword rapydscriptPreCondit	import from as
 syn keyword rapydscriptException	try except finally
 syn keyword rapydscriptOperator	and in is not or 
