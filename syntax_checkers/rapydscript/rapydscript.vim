@@ -27,14 +27,34 @@ function! SyntaxCheckers_rapydscript_rapydscript_IsAvailable() dict
     return executable(self.getExec())
 endfunction
 
+function! SyntaxCheckers_rapydscript_rapydscript_GetHighlightRegex(item)
+    let term = a:item['highlightname']
+    if term == ';'
+        return '\V;'
+    endif
+    if term !=# ''
+        return '\V\<' . escape(term, '\') . '\>'
+    endif
+    return ''
+endfunction
+
 function! SyntaxCheckers_rapydscript_rapydscript_GetLocList() dict
     let makeprg = self.makeprgBuild({ 'args': 'lint --errorformat vim' })
 
-    let errorformat  = '%f:%l:%c:%t:%s:%m'
+    let errorformat  = '%f:%l:%c:%t:%m'
 
-    return SyntasticMake({
+    let loclist = SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat })
+
+    for e in loclist
+        let parts = split(e['text'], ':', 1)
+        let e['vcol'] = 0
+        let e['text'] = join(parts[1:], ':')
+        let e['highlightname'] = parts[0]
+    endfor
+
+    return loclist
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
