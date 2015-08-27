@@ -168,54 +168,48 @@ syn match  rapydscriptEscapeError	"\\\o\{,2}[89]" display contained
 syn match  rapydscriptEscape		"\\x\x\{2}" display contained
 syn match  rapydscriptEscapeError	"\\x\x\=\X" display contained
 syn match  rapydscriptEscape		"\\$"
+syn match  rapydscriptEscape	    "\\u\x\{4}" display contained
+syn match  rapydscriptEscapeError	"\\u\x\{,3}\X" display contained
+syn match  rapydscriptEscape	    "\\U\x\{8}" display contained
+syn match  rapydscriptEscapeError	"\\U\x\{,7}\X" display contained
+syn match  rapydscriptEscape	    "\\N{[A-Z ]\+}" display contained
+syn match  rapydscriptEscapeError	"\\N{[^A-Z ]\+}" display contained
 
-" Unicode strings
-syn region rapydscriptUniString	start=+[uU]'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptUniEscape,rapydscriptEscapeError,rapydscriptUniEscapeError,@Spell
-syn region rapydscriptUniString	start=+[uU]"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptUniEscape,rapydscriptEscapeError,rapydscriptUniEscapeError,@Spell
-syn region rapydscriptUniString	start=+[uU]"""+ end=+"""+ keepend contains=rapydscriptEscape,rapydscriptUniEscape,rapydscriptEscapeError,rapydscriptUniEscapeError,rapydscriptDocTest2,rapydscriptSpaceError,@Spell
-syn region rapydscriptUniString	start=+[uU]'''+ end=+'''+ keepend contains=rapydscriptEscape,rapydscriptUniEscape,rapydscriptEscapeError,rapydscriptUniEscapeError,rapydscriptDocTest,rapydscriptSpaceError,@Spell
+" Verbatim strings
+syn region rapydscriptVerbatimString		start=+v'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
+syn region rapydscriptVerbatimString		start=+v"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
+syn region rapydscriptVerbatimString		start=+v"""+ end=+"""+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest2,rapydscriptSpaceError,@Spell
+syn region rapydscriptVerbatimString		start=+v'''+ end=+'''+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest,rapydscriptSpaceError,@Spell
 
-syn match  rapydscriptUniEscape	"\\u\x\{4}" display contained
-syn match  rapydscriptUniEscapeError	"\\u\x\{,3}\X" display contained
-syn match  rapydscriptUniEscape	"\\U\x\{8}" display contained
-syn match  rapydscriptUniEscapeError	"\\U\x\{,7}\X" display contained
-syn match  rapydscriptUniEscape	"\\N{[A-Z ]\+}" display contained
-syn match  rapydscriptUniEscapeError	"\\N{[^A-Z ]\+}" display contained
 
 " Raw strings
-syn region rapydscriptRawString	start=+[rR]'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=rapydscriptRawEscape,@Spell
-syn region rapydscriptRawString	start=+[rR]"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=rapydscriptRawEscape,@Spell
-syn region rapydscriptRawString	start=+[rR]"""+ end=+"""+ keepend contains=rapydscriptDocTest2,rapydscriptSpaceError,@Spell
-syn region rapydscriptRawString	start=+[rR]'''+ end=+'''+ keepend contains=rapydscriptDocTest,rapydscriptSpaceError,@Spell
+syn region rapydscriptRawString	start=+r'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=rapydscriptRawEscape,@Spell
+syn region rapydscriptRawString	start=+r"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=rapydscriptRawEscape,@Spell
+syn region rapydscriptRawString	start=+r"""+ end=+"""+ keepend contains=rapydscriptDocTest2,rapydscriptSpaceError,@Spell
+syn region rapydscriptRawString	start=+r'''+ end=+'''+ keepend contains=rapydscriptDocTest,rapydscriptSpaceError,@Spell
 
 syn match rapydscriptRawEscape	+\\['"]+ display transparent contained
-
-" Unicode raw strings
-syn region rapydscriptUniRawString	start=+[uU][rR]'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=rapydscriptRawEscape,rapydscriptUniRawEscape,rapydscriptUniRawEscapeError,@Spell
-syn region rapydscriptUniRawString	start=+[uU][rR]"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=rapydscriptRawEscape,rapydscriptUniRawEscape,rapydscriptUniRawEscapeError,@Spell
-syn region rapydscriptUniRawString	start=+[uU][rR]"""+ end=+"""+ keepend contains=rapydscriptUniRawEscape,rapydscriptUniRawEscapeError,rapydscriptDocTest2,rapydscriptSpaceError,@Spell
-syn region rapydscriptUniRawString	start=+[uU][rR]'''+ end=+'''+ keepend contains=rapydscriptUniRawEscape,rapydscriptUniRawEscapeError,rapydscriptDocTest,rapydscriptSpaceError,@Spell
 
 syn match  rapydscriptUniRawEscape		"\([^\\]\(\\\\\)*\)\@<=\\u\x\{4}" display contained
 syn match  rapydscriptUniRawEscapeError	"\([^\\]\(\\\\\)*\)\@<=\\u\x\{,3}\X" display contained
 
 if exists("rapydscript_highlight_string_formatting") && rapydscript_highlight_string_formatting != 0
   " String formatting
-  syn match rapydscriptStrFormatting	"%\(([^)]\+)\)\=[-#0 +]*\d*\(\.\d\+\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=rapydscriptString,rapydscriptUniString,rapydscriptRawString,rapydscriptUniRawString
-  syn match rapydscriptStrFormatting	"%[-#0 +]*\(\*\|\d\+\)\=\(\.\(\*\|\d\+\)\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=rapydscriptString,rapydscriptUniString,rapydscriptRawString,rapydscriptUniRawString
+  syn match rapydscriptStrFormatting	"%\(([^)]\+)\)\=[-#0 +]*\d*\(\.\d\+\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=rapydscriptString,rapydscriptRawString
+  syn match rapydscriptStrFormatting	"%[-#0 +]*\(\*\|\d\+\)\=\(\.\(\*\|\d\+\)\)\=[hlL]\=[diouxXeEfFgGcrs%]" contained containedin=rapydscriptString,rapydscriptRawString
 endif
 
 if exists("rapydscript_highlight_string_format") && rapydscript_highlight_string_format != 0
   " str.format syntax
-  syn match rapydscriptStrFormat "{{\|}}" contained containedin=rapydscriptString,rapydscriptUniString,rapydscriptRawString,rapydscriptUniRawString
-  syn match rapydscriptStrFormat	"{\([a-zA-Z_][a-zA-Z0-9_]*\|\d\+\)\(\.[a-zA-Z_][a-zA-Z0-9_]*\|\[\(\d\+\|[^!:\}]\+\)\]\)*\(![rs]\)\=\(:\({\([a-zA-Z_][a-zA-Z0-9_]*\|\d\+\)}\|\([^}]\=[<>=^]\)\=[ +-]\=#\=0\=\d*\(\.\d\+\)\=[bcdeEfFgGnoxX%]\=\)\=\)\=}" contained containedin=rapydscriptString,rapydscriptUniString,rapydscriptRawString,rapydscriptUniRawString
+  syn match rapydscriptStrFormat "{{\|}}" contained containedin=rapydscriptString,rapydscriptRawString
+  syn match rapydscriptStrFormat	"{\([a-zA-Z_][a-zA-Z0-9_]*\|\d\+\)\(\.[a-zA-Z_][a-zA-Z0-9_]*\|\[\(\d\+\|[^!:\}]\+\)\]\)*\(![rs]\)\=\(:\({\([a-zA-Z_][a-zA-Z0-9_]*\|\d\+\)}\|\([^}]\=[<>=^]\)\=[ +-]\=#\=0\=\d*\(\.\d\+\)\=[bcdeEfFgGnoxX%]\=\)\=\)\=}" contained containedin=rapydscriptString,rapydscriptRawString
 endif
 
 if exists("rapydscript_highlight_string_templates") && rapydscript_highlight_string_templates != 0
   " String templates
-  syn match rapydscriptStrTemplate	"\$\$" contained containedin=rapydscriptString,rapydscriptUniString,rapydscriptRawString,rapydscriptUniRawString
-  syn match rapydscriptStrTemplate	"\${[a-zA-Z_$][a-zA-Z0-9_$]*}" contained containedin=rapydscriptString,rapydscriptUniString,rapydscriptRawString,rapydscriptUniRawString
-  syn match rapydscriptStrTemplate	"\$[a-zA-Z_$][a-zA-Z0-9_$]*" contained containedin=rapydscriptString,rapydscriptUniString,rapydscriptRawString,rapydscriptUniRawString
+  syn match rapydscriptStrTemplate	"\$\$" contained containedin=rapydscriptString,rapydscriptRawString
+  syn match rapydscriptStrTemplate	"\${[a-zA-Z_$][a-zA-Z0-9_$]*}" contained containedin=rapydscriptString,rapydscriptRawString
+  syn match rapydscriptStrTemplate	"\$[a-zA-Z_$][a-zA-Z0-9_$]*" contained containedin=rapydscriptString,rapydscriptRawString
 endif
 
 if exists("rapydscript_highlight_doctests") && rapydscript_highlight_doctests != 0
@@ -298,7 +292,7 @@ else
   syn sync maxlines=200
 endif
 
-syn cluster rapydscriptStringType contains=rapydscriptString,rapydscriptUniString,rapydscriptRawString,rapydscriptUniRawString
+syn cluster rapydscriptStringType contains=rapydscriptString,rapydscriptRawString
 syn cluster rapydscriptNumberType contains=rapydscriptNumber,rapydscriptHexNumber,rapydscriptFloat
 syn cluster rapydscriptBuiltin    contains=rapydscriptBuiltinObj,rapydscriptBuiltinFunc
 
@@ -344,9 +338,8 @@ if version >= 508 || !exists("did_rapydscript_syn_inits")
   HiLink rapydscriptSpaceError	Error
 
   HiLink rapydscriptString       String
-  HiLink rapydscriptUniString    String
   HiLink rapydscriptRawString    String
-  HiLink rapydscriptUniRawString String
+  HiLink rapydscriptVerbatimString PreProc
 
   HiLink rapydscriptEscape			Special
   HiLink rapydscriptEscapeError		Error
