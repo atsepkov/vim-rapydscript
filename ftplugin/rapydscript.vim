@@ -25,3 +25,6 @@ set makeprg=echo\ 'Compiling\ %'\ &&\ rapydscript\ %\ &&\ echo\ 'Finished\ compi
 " dump current arg (in the future I should have this auto-prepend \ to hashes
 " and arrays)
 map ,D! viwoh"zy<F12>o<HOME>console.log('<ESC>"zpa:',<ESC>"zpa)<ESC>hh<F12>
+
+" python style comments instead of the default C style
+set commentstring=#\ %s
