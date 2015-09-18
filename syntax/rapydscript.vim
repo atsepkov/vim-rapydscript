@@ -175,11 +175,12 @@ syn match  rapydscriptEscapeError	"\\U\x\{,7}\X" display contained
 syn match  rapydscriptEscape	    "\\N{[A-Z ]\+}" display contained
 syn match  rapydscriptEscapeError	"\\N{[^A-Z ]\+}" display contained
 
-" Verbatim strings
-syn region rapydscriptVerbatimString		start=+v'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
-syn region rapydscriptVerbatimString		start=+v"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
-syn region rapydscriptVerbatimString		start=+v"""+ end=+"""+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest2,rapydscriptSpaceError,@Spell
-syn region rapydscriptVerbatimString		start=+v'''+ end=+'''+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest,rapydscriptSpaceError,@Spell
+
+" MAGIC functions
+syn region rapydscriptMagicFunction		start=+JS('+ skip=+\\\\\|\\'\|\\$+ excludenl end=+')+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
+syn region rapydscriptMagicFunction		start=+JS("+ skip=+\\\\\|\\"\|\\$+ excludenl end=+")+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
+syn region rapydscriptMagicFunction		start=+JS("""+ end=+""")+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest2,rapydscriptSpaceError,@Spell
+syn region rapydscriptMagicFunction		start=+JS('''+ end=+''')+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest,rapydscriptSpaceError,@Spell
 
 
 " Raw strings
@@ -339,7 +340,7 @@ if version >= 508 || !exists("did_rapydscript_syn_inits")
 
   HiLink rapydscriptString       String
   HiLink rapydscriptRawString    String
-  HiLink rapydscriptVerbatimString PreProc
+  HiLink rapydscriptMagicFunction PreProc
 
   HiLink rapydscriptEscape			Special
   HiLink rapydscriptEscapeError		Error

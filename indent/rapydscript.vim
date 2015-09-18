@@ -1,5 +1,5 @@
 " RapydScript indent file
-" Language:	        RapydScript
+" Language:			RapydScript
 " Maintainer:       Alexander Tsepkov <atsepkov@pyjeon.com>
 " Original Authors: Eric Mc Sween <em@tomcom.de> David Bustos <bustos@caltech.edu> 
 " Last Change:      2014 Jan 3
@@ -107,20 +107,27 @@ function! GetRapydScriptPEPIndent(lnum)
     endif
 
     " If we can find an open parenthesis/bracket/brace, line up with it.
+	" For parentheses prefixed with a string (function call) align with that
+	" instead
     call cursor(a:lnum, 1)
     let parlnum = s:SearchParensPair()
     if parlnum > 0
         let parcol = col('.')
         let closing_paren = match(getline(a:lnum), '^\s*[])}]') != -1
-        if match(getline(parlnum), '[([{]\s*$', parcol - 1) != -1
-            if closing_paren
-                return indent(parlnum)
-            else
-                return indent(parlnum) + &shiftwidth
-            endif
+        if closing_paren
+            return indent(parlnum)
         else
-            return parcol
+            return indent(parlnum) + &shiftwidth
         endif
+"        if match(getline(parlnum), '[([{]\s*$', parcol - 1) != -1
+"            if closing_paren
+"                return indent(parlnum)
+"            else
+"                return indent(parlnum) + &shiftwidth
+"            endif
+"        else
+"            return parcol
+"        endif
     endif
 
     " Examine this line
