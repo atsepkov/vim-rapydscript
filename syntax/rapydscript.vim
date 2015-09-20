@@ -126,8 +126,10 @@ syn match rapydscriptArithmetic "+\|-\|\*\|\*\*\|/\|//\|%\|<<\|>>\|&\||\|\^\|\~"
 syn match rapydscriptComparison "<\|>\|<=\|>=\|==\|!="
 
 
-" Decorators (not yet supported)
-"syn match   rapydscriptDecorator	"@" display nextgroup=rapydscriptFunction skipwhite
+" Decorators 
+syn match   rapydscriptDecorator "@" display nextgroup=rapydscriptDottedName skipwhite
+syn match   rapydscriptDottedName "[a-zA-Z_][a-zA-Z0-9_]*\(\.[a-zA-Z_][a-zA-Z0-9_]*\)*" display contained
+syn match   rapydscriptDot        "\." display containedin=rapydscriptDottedName
 
 " Comments
 syn match   rapydscriptComment	"#.*$" display contains=rapydscriptTodo,@Spell
@@ -326,6 +328,8 @@ if version >= 508 || !exists("did_rapydscript_syn_inits")
   HiLink rapydscriptArithmetic   Operator
 
   HiLink rapydscriptDecorator	Define
+  HiLink rapydscriptDottedName  Function
+  HiLink rapydscriptDot         Normal
 
   HiLink rapydscriptComment		Comment
   HiLink rapydscriptDocstring    Comment
