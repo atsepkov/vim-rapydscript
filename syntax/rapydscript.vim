@@ -94,7 +94,7 @@ syn keyword rapydscriptStatement	break continue del
 syn keyword rapydscriptStatement	exec return new
 syn keyword rapydscriptStatement	pass print raise
 syn keyword rapydscriptStatement	global nonlocal assert
-syn keyword rapydscriptStatement	yield
+syn keyword rapydscriptStatement	yield with
 
 " Class definitions
 syn region  rapydscriptClass start="^\s*class\>" end="\s*:" contains=rapydscriptClassDef,rapydscriptClassName,rapydscriptSuperclasses
