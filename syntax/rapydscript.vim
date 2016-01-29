@@ -244,19 +244,19 @@ if exists("rapydscript_highlight_builtins") && rapydscript_highlight_builtins !=
   syn keyword rapydscriptBuiltinModule	Math RegExp Image Error Array Object String Number
   syn keyword rapydscriptBuiltinModule	dict list
 
-  syn keyword rapydscriptBuiltinFunc	__import__ abs all any apply
-  syn keyword rapydscriptBuiltinFunc	basestring bin bool buffer bytearray bytes callable
-  syn keyword rapydscriptBuiltinFunc	chr classmethod cmp coerce compile complex
+  syn keyword rapydscriptBuiltinFunc	abs any apply
+  syn keyword rapydscriptBuiltinFunc	basestring bin bool callable
+  syn keyword rapydscriptBuiltinFunc	chr classmethod cmp compile complex
   syn keyword rapydscriptBuiltinFunc	delattr dict dir divmod enumerate eval
   syn keyword rapydscriptBuiltinFunc	execfile file filter float format frozenset getattr
-  syn keyword rapydscriptBuiltinFunc	globals hasattr hash help hex id 
-  syn keyword rapydscriptBuiltinFunc	input int intern isinstance
+  syn keyword rapydscriptBuiltinFunc	hasattr hash help hex 
+  syn keyword rapydscriptBuiltinFunc	input int isinstance
   syn keyword rapydscriptBuiltinFunc	issubclass iter len list locals long map
   syn keyword rapydscriptBuiltinFunc	pow property range
-  syn keyword rapydscriptBuiltinFunc	raw_input reduce reload repr
+  syn keyword rapydscriptBuiltinFunc	reduce reload repr
   syn keyword rapydscriptBuiltinFunc	reversed round set setattr
   syn keyword rapydscriptBuiltinFunc	slice sorted staticmethod str sum super tuple
-  syn keyword rapydscriptBuiltinFunc	type unichr unicode vars xrange zip
+  syn keyword rapydscriptBuiltinFunc	type chr vars zip
 endif
 
 if exists("rapydscript_highlight_exceptions") && rapydscript_highlight_exceptions != 0
