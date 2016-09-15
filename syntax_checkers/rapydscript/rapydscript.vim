@@ -17,27 +17,6 @@ let g:loaded_syntastic_rapydscript_rapydscript_checker = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-if exists('g:syntastic_extra_filetypes')
-    call add(g:syntastic_extra_filetypes, 'rapydscript')
-else
-    let g:syntastic_extra_filetypes = ['rapydscript']
-endif
-
-function! SyntaxCheckers_rapydscript_rapydscript_IsAvailable() dict
-    return executable(self.getExec())
-endfunction
-
-function! SyntaxCheckers_rapydscript_rapydscript_GetHighlightRegex(item)
-    let term = a:item['highlightname']
-    if term == ';'
-        return '\V;'
-    endif
-    if term !=# ''
-        return '\V\<' . escape(term, '\') . '\>'
-    endif
-    return ''
-endfunction
-
 function! SyntaxCheckers_rapydscript_rapydscript_GetLocList() dict
     let makeprg = self.makeprgBuild({ 'args': '--lint' })
 
@@ -48,10 +27,11 @@ function! SyntaxCheckers_rapydscript_rapydscript_GetLocList() dict
         \ 'errorformat': errorformat })
 
     for e in loclist
-        let parts = split(e['text'], ':', 1)
-        let e['vcol'] = 0
-        let e['text'] = join(parts[1:], ':')
-        let e['highlightname'] = parts[0]
+        let parts = matchlist(e['text'], '\v^([^:]*)\:(.*)')
+        if len(parts) > 2 
+            let e['hl'] = '\V' . (parts[1] ==# ';' ? ';' : '\<' . escape(parts[1], '\') . '\>')
+            let e['text'] = parts[2]
+        endif
     endfor
 
     return loclist
