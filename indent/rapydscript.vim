@@ -16,7 +16,7 @@ setlocal autoindent
 setlocal indentexpr=GetRapydScriptPEPIndent(v:lnum)
 setlocal indentkeys=!^F,o,O,<:>,0),0],0},=elif,=except
 
-let s:maxoff = 1
+let s:maxoff = 5
 
 " Find backwards the closest open parenthesis/bracket/brace.
 function! s:SearchParensPair()

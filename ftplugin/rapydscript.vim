@@ -13,8 +13,8 @@ nnoremap ,d ?\(\(global\\|nonlocal\) (\{0,1\}[^=(]*.\\|def \)\><CR>
 nnoremap ,= ?\(\([ ]*,[ ]*$[a-z][a-z0-9]*[ ]*\)*)\)\{0,1\}\s*\([-+*/%.\|&x^]\\|\(\*\*\\|\|\|\\|>>\\|<<\)\)\{0,1\}=[^=]<CR>``0n<Right>
 
 " comment/uncomment (already part of my main .vimrc)
-"map ,# :s_^_#_<CR>:noh<CR>
-"map ,* :s_#__<CR>:noh<CR>
+map ,# :s_^_#_<CR>:noh<CR>
+map ,* :s_#__<CR>:noh<CR>
 
 set makeprg=echo\ 'Compiling\ %'\ &&\ rapydscript\ %\ &&\ echo\ 'Finished\ compiling'
 

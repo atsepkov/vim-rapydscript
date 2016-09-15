@@ -39,9 +39,9 @@ function! SyntaxCheckers_rapydscript_rapydscript_GetHighlightRegex(item)
 endfunction
 
 function! SyntaxCheckers_rapydscript_rapydscript_GetLocList() dict
-    let makeprg = self.makeprgBuild({ 'args': 'lint --errorformat vim' })
+    let makeprg = self.makeprgBuild({ 'args': '--lint' })
 
-    let errorformat  = '%f:%l:%c:%t:%m'
+    let errorformat = '%f:%l:%c:%t:%m'
 
     let loclist = SyntasticMake({
         \ 'makeprg': makeprg,

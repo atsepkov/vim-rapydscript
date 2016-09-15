@@ -104,7 +104,7 @@ syn region  rapydscriptSuperclasses start="("ms=s+1 end=")"me=e-1 keepend contai
 syn match   rapydscriptSuperclass "[a-zA-Z_$][a-zA-Z_0-9$]*" contained
 
 " Function definitions
-syn region  rapydscriptFunc start="\(^\|[^A-Za-z0-9_]\)def\>" end=")\s*:" keepend contains=rapydscriptFuncDef,rapydscriptFuncName,rapydscriptFuncParams
+syn region  rapydscriptFunc start="\(^\|[^A-Za-z0-9_]\)def\>" end="\s*:" keepend contains=rapydscriptFuncDef,rapydscriptFuncName,rapydscriptFuncParams
 syn keyword rapydscriptFuncDef def contained nextgroup=rapydscriptFuncName skipwhite
 syn match   rapydscriptFuncName	"[a-zA-Z_$][a-zA-Z0-9_$]*" display contained nextgroup=rapydscriptFuncParams skipwhite
 syn region  rapydscriptFuncParams start="("ms=s+1 end=")"me=e-1 contained transparent contains=rapydscriptParam 
