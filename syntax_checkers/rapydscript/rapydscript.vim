@@ -1,7 +1,7 @@
 " =======================================================================
 " Version:     1.1.0
 " Description: Vim plugin that enables syntax checking in syntastic with the rapydscript linter
-" Maintainer:  Alexander Tsepkov <atspekov at gmail dot com>
+" Maintainer:  Alexander Tsepkov <atsepkov at gmail dot com>
 " Based On Work From:  Kovid Goyal <kovid at kovidgoyal.net>
 " License:     Copyright (C) 2015 Kovid Goyal (Vim License)
 " The same license that vim is distributed under. See :help license
