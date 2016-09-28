@@ -156,10 +156,10 @@ endif
 
 
 " Strings
-syn region rapydscriptString		start=+'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
-syn region rapydscriptString		start=+"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
-syn region rapydscriptString		start=+"""+ end=+"""+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest2,rapydscriptSpaceError,@Spell
-syn region rapydscriptString		start=+'''+ end=+'''+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest,rapydscriptSpaceError,@Spell
+syn region rapydscriptString		start=+[Ff]\?'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
+syn region rapydscriptString		start=+[Ff]\?"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
+syn region rapydscriptString		start=+[Ff]\?"""+ end=+"""+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest2,rapydscriptSpaceError,@Spell
+syn region rapydscriptString		start=+[Ff]\?'''+ end=+'''+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest,rapydscriptSpaceError,@Spell
 
 syn region rapydscriptDocstring  start=+^\s*[uU]\?[rR]\?"""+ end=+"""+ keepend excludenl contains=rapydscriptEscape,@Spell,rapydscriptDoctest,rapydscriptDocTest2,rapydscriptSpaceError
 syn region rapydscriptDocstring  start=+^\s*[uU]\?[rR]\?'''+ end=+'''+ keepend excludenl contains=rapydscriptEscape,@Spell,rapydscriptDoctest,rapydscriptDocTest2,rapydscriptSpaceError
