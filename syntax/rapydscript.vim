@@ -307,13 +307,13 @@ if version >= 508 || !exists("did_rapydscript_syn_inits")
   endif
 
   HiLink rapydscriptFuncDef     Statement
-  HiLink rapydscriptFuncName    Entity
+  HiLink rapydscriptFuncName    Function
   HiLink rapydscriptParamName Test
   HiLink rapydscriptDefaultAssignment rapydscriptAssignment
   HiLink rapydscriptParamDefault Statement
   HiLink rapydscriptClassDef     Statement
-  HiLink rapydscriptClassName    Entity
-  HiLink rapydscriptSuperclass   Entity
+  HiLink rapydscriptClassName    Function
+  HiLink rapydscriptSuperclass   Function
 
   HiLink rapydscriptStatement	Statement
   HiLink rapydscriptPreCondit	Statement
