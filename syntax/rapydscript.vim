@@ -238,7 +238,8 @@ syn match   rapydscriptBinError	"\<0[bB][01]*[2-9]\d*[lL]\=\>" display
 
 if exists("rapydscript_highlight_builtins") && rapydscript_highlight_builtins != 0
   " Builtin functions, types and objects
-  syn keyword rapydscriptBuiltinObj	True False None self this undefined true false
+  syn keyword rapydscriptBuiltinObj	True False None this undefined true false
+  syn keyword rapydscriptSelf self
   syn keyword rapydscriptBuiltinObj	__debug__ __doc__ __file__ __name__ __package__
 
   syn keyword rapydscriptBuiltinModule	Math RegExp Image Error Array Object String Number
@@ -316,7 +317,7 @@ if version >= 508 || !exists("did_rapydscript_syn_inits")
   HiLink rapydscriptSuperclass   Function
 
   HiLink rapydscriptStatement	Statement
-  HiLink rapydscriptPreCondit	Statement
+  HiLink rapydscriptPreCondit	Include
   HiLink rapydscriptFunction		Function
   HiLink rapydscriptConditional	Conditional
   HiLink rapydscriptRepeat		Repeat
@@ -373,6 +374,7 @@ if version >= 508 || !exists("did_rapydscript_syn_inits")
   HiLink rapydscriptBuiltinFunc  Structure
 
   HiLink rapydscriptExClass	Structure
+  HiLink rapydscriptSelf Include
 
   delcommand HiLink
 endif
