@@ -94,7 +94,7 @@ syn keyword rapydscriptStatement	break continue del
 syn keyword rapydscriptStatement	exec return new
 syn keyword rapydscriptStatement	pass print raise
 syn keyword rapydscriptStatement	global nonlocal assert
-syn keyword rapydscriptStatement	yield
+syn keyword rapydscriptStatement	yield with
 
 " Class definitions
 syn region  rapydscriptClass start="^\s*class\>" end="\s*:" contains=rapydscriptClassDef,rapydscriptClassName,rapydscriptSuperclasses
@@ -107,7 +107,7 @@ syn match   rapydscriptSuperclass "[a-zA-Z_$][a-zA-Z_0-9$]*" contained
 syn region  rapydscriptFunc start="\(^\|[^A-Za-z0-9_]\)def\>" end="\s*:" keepend contains=rapydscriptFuncDef,rapydscriptFuncName,rapydscriptFuncParams
 syn keyword rapydscriptFuncDef def contained nextgroup=rapydscriptFuncName skipwhite
 syn match   rapydscriptFuncName	"[a-zA-Z_$][a-zA-Z0-9_$]*" display contained nextgroup=rapydscriptFuncParams skipwhite
-syn region  rapydscriptFuncParams start="("ms=s+1 end=")"me=e-1 contained transparent contains=rapydscriptParam 
+syn region  rapydscriptFuncParams start="("ms=s+1 end=")"me=e-1 contained transparent contains=rapydscriptSelf,rapydscriptParam 
 syn region   rapydscriptParam start="[a-zA-Z_$]" end="\(,\|)\s*:\)" contained contains=rapydscriptParamName,rapydscriptParamDefault,rapydscriptDefaultAssignment transparent nextgroup=rapydscriptParam
 syn match rapydscriptParamName "[a-zA-Z_$][a-zA-Z0-9_$]*" contained nextgroup=rapydscriptDefaultAssignment skipwhite skipnl
 syn match rapydscriptDefaultAssignment "=" nextgroup=rapydscriptParamDefault skipwhite contained skipnl
@@ -156,10 +156,10 @@ endif
 
 
 " Strings
-syn region rapydscriptString		start=+'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
-syn region rapydscriptString		start=+"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
-syn region rapydscriptString		start=+"""+ end=+"""+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest2,rapydscriptSpaceError,@Spell
-syn region rapydscriptString		start=+'''+ end=+'''+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest,rapydscriptSpaceError,@Spell
+syn region rapydscriptString		start=+[Ff]\?'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
+syn region rapydscriptString		start=+[Ff]\?"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,@Spell
+syn region rapydscriptString		start=+[Ff]\?"""+ end=+"""+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest2,rapydscriptSpaceError,@Spell
+syn region rapydscriptString		start=+[Ff]\?'''+ end=+'''+ keepend contains=rapydscriptEscape,rapydscriptEscapeError,rapydscriptDocTest,rapydscriptSpaceError,@Spell
 
 syn region rapydscriptDocstring  start=+^\s*[uU]\?[rR]\?"""+ end=+"""+ keepend excludenl contains=rapydscriptEscape,@Spell,rapydscriptDoctest,rapydscriptDocTest2,rapydscriptSpaceError
 syn region rapydscriptDocstring  start=+^\s*[uU]\?[rR]\?'''+ end=+'''+ keepend excludenl contains=rapydscriptEscape,@Spell,rapydscriptDoctest,rapydscriptDocTest2,rapydscriptSpaceError
@@ -239,25 +239,26 @@ syn match   rapydscriptBinError	"\<0[bB][01]*[2-9]\d*[lL]\=\>" display
 
 if exists("rapydscript_highlight_builtins") && rapydscript_highlight_builtins != 0
   " Builtin functions, types and objects
-  syn keyword rapydscriptBuiltinObj	True False None self this undefined true false
+  syn keyword rapydscriptBuiltinObj	True False None this undefined true false
+  syn keyword rapydscriptSelf self
   syn keyword rapydscriptBuiltinObj	__debug__ __doc__ __file__ __name__ __package__
 
   syn keyword rapydscriptBuiltinModule	Math RegExp Image Error Array Object String Number
   syn keyword rapydscriptBuiltinModule	dict list
 
-  syn keyword rapydscriptBuiltinFunc	__import__ abs all any apply
-  syn keyword rapydscriptBuiltinFunc	basestring bin bool buffer bytearray bytes callable
-  syn keyword rapydscriptBuiltinFunc	chr classmethod cmp coerce compile complex
+  syn keyword rapydscriptBuiltinFunc	abs any apply
+  syn keyword rapydscriptBuiltinFunc	basestring bin bool callable
+  syn keyword rapydscriptBuiltinFunc	chr classmethod cmp compile complex
   syn keyword rapydscriptBuiltinFunc	delattr dict dir divmod enumerate eval
   syn keyword rapydscriptBuiltinFunc	execfile file filter float format frozenset getattr
-  syn keyword rapydscriptBuiltinFunc	globals hasattr hash help hex id 
-  syn keyword rapydscriptBuiltinFunc	input int intern isinstance
+  syn keyword rapydscriptBuiltinFunc	hasattr hash help hex 
+  syn keyword rapydscriptBuiltinFunc	input int isinstance
   syn keyword rapydscriptBuiltinFunc	issubclass iter len list locals long map
   syn keyword rapydscriptBuiltinFunc	pow property range
-  syn keyword rapydscriptBuiltinFunc	raw_input reduce reload repr
+  syn keyword rapydscriptBuiltinFunc	reduce reload repr
   syn keyword rapydscriptBuiltinFunc	reversed round set setattr
   syn keyword rapydscriptBuiltinFunc	slice sorted staticmethod str sum super tuple
-  syn keyword rapydscriptBuiltinFunc	type unichr unicode vars xrange zip
+  syn keyword rapydscriptBuiltinFunc	type chr vars zip
 endif
 
 if exists("rapydscript_highlight_exceptions") && rapydscript_highlight_exceptions != 0
@@ -308,16 +309,16 @@ if version >= 508 || !exists("did_rapydscript_syn_inits")
   endif
 
   HiLink rapydscriptFuncDef     Statement
-  HiLink rapydscriptFuncName    Entity
+  HiLink rapydscriptFuncName    Function
   HiLink rapydscriptParamName Test
   HiLink rapydscriptDefaultAssignment rapydscriptAssignment
   HiLink rapydscriptParamDefault Statement
   HiLink rapydscriptClassDef     Statement
-  HiLink rapydscriptClassName    Entity
-  HiLink rapydscriptSuperclass   Entity
+  HiLink rapydscriptClassName    Function
+  HiLink rapydscriptSuperclass   Function
 
   HiLink rapydscriptStatement	Statement
-  HiLink rapydscriptPreCondit	Statement
+  HiLink rapydscriptPreCondit	Include
   HiLink rapydscriptFunction		Function
   HiLink rapydscriptConditional	Conditional
   HiLink rapydscriptRepeat		Repeat
@@ -374,6 +375,7 @@ if version >= 508 || !exists("did_rapydscript_syn_inits")
   HiLink rapydscriptBuiltinFunc  Structure
 
   HiLink rapydscriptExClass	Structure
+  HiLink rapydscriptSelf Include
 
   delcommand HiLink
 endif

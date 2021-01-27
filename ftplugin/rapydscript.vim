@@ -6,6 +6,11 @@ set magic
 " highlight modes
 let rapydscript_highlight_builtins = 1
 
+" Setup syntastic integration
+if !exists('g:syntastic_rapydscript_checkers')
+    let g:syntastic_rapydscript_checkers = ['rapydscript']
+endif
+
 " jump to variable/function definition, also finds variables declared in groups (implicit tuples)
 nnoremap ,d ?\(\(global\\|nonlocal\) (\{0,1\}[^=(]*.\\|def \)\><CR>
 
