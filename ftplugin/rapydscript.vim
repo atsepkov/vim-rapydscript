@@ -22,7 +22,7 @@ function! s:ale_linters_rapydscript_lint_handle(buffer, lines) abort
         \   'code': l:item['ident'],
         \   'text': l:item['message'],
         \}
-        if l:item['end_col']
+        if has_key(l:item, 'end_col')
             let l:result['end_col'] = l:item['end_col']
         endif
         call add(l:output, l:result)
