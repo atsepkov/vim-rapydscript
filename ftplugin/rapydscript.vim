@@ -12,16 +12,18 @@ function! s:ale_linters_rapydscript_lint_handle(buffer, lines) abort
     let l:output = []
     for l:item in l:items
         let l:type = 'E'
-        if l:item['level'] != 'ERR'
+        if get(l:item, 'level', 'ERR') == 'WARN'
             let l:type = 'W'
         endif
         let l:result = {
-        \   'lnum': l:item['start_line'],
-        \   'col': l:item['start_col'],
+        \   'lnum': get(l:item, 'start_line', 0),
+        \   'col': get(l:item, 'start_col', 0),
         \   'type': l:type,
-        \   'code': l:item['ident'],
-        \   'text': l:item['message'],
+        \   'text': get(l:item, 'message', 'Unknown error'),
         \}
+        if has_key(l:item, 'ident')
+            let l:result['code'] = l:item['ident']
+        endif
         if has_key(l:item, 'end_col')
             let l:result['end_col'] = l:item['end_col']
         endif
